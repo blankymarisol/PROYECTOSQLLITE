@@ -30,7 +30,7 @@ public class ProductoDAO {
             pstmt.setInt(1, id);
             try (ResultSet rs = pstmt.executeQuery()) {
                 if (rs.next()) {
-                    return new Producto(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getString("origen"), rs.getInt("precio"), rs.getInt("existencia"));
+                    return new Producto(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getString("origen"), rs.getInt("precio"), rs.getInt("cantidad"));
                 }
             }
         }
@@ -44,7 +44,7 @@ public class ProductoDAO {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                productos.add(new Producto(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getString("origen"), rs.getInt("precio"), rs.getInt("existencia")));
+                productos.add(new Producto(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getString("origen"), rs.getInt("precio"), rs.getInt("cantidad")));
             }
         }
         return productos;
@@ -58,7 +58,7 @@ public class ProductoDAO {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
             while (rs.next()) {
-                productos.add(new Producto(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getString("origen"), rs.getInt("precio"), rs.getInt("existencia")));
+                productos.add(new Producto(rs.getInt("id_producto"), rs.getString("descripcion"), rs.getString("origen"), rs.getInt("precio"), rs.getInt("cantidad")));
             }
         }
         return productos;
