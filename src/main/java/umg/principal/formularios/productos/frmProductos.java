@@ -2,6 +2,7 @@ package umg.principal.formularios.productos;
 
 import umg.principal.DaseDatos.Service.ProductoService;
 import umg.principal.DaseDatos.model.Producto;
+import umg.principal.reportes.pruebas;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -19,6 +20,9 @@ public class frmProductos {
     private JButton buttonBuscar;
     private JComboBox comboBoxOrigen;
     private JButton buttonSalir;
+    private JComboBox comboBoxReporte;
+    private JLabel lblReportes;
+    private JButton buttonReportes;
 
     public frmProductos() {
 
@@ -27,6 +31,11 @@ public class frmProductos {
         comboBoxOrigen.addItem("China");
         comboBoxOrigen.addItem("Japon");
         comboBoxOrigen.addItem("Corea");
+
+        comboBoxReporte.addItem("Existencia menores a 20 unidades");
+        comboBoxReporte.addItem("Reporte país especifico");
+        comboBoxReporte.addItem("Existencias menores a 2000");
+        comboBoxReporte.addItem("Agrupado por pais y ordenado de mayor a menor");
 
 
         buttonLimpiar.addActionListener(new ActionListener() {
@@ -109,6 +118,23 @@ public class frmProductos {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
+            }
+        });
+        buttonReportes.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                pruebas pr = new pruebas();
+                if(comboBoxReporte.getSelectedItem().toString().equals("Existencia menores a 20 unidades")){
+                    pruebas.GenerarReporte( "cantidad > 20");
+                }else if(comboBoxReporte.getSelectedItem().toString().equals("Reporte país especifico")){
+                    pruebas.GenerarReporte("origen = 'China'");
+                }else if(comboBoxReporte.getSelectedItem().toString().equals("Existencias menores a 2000")){
+                    pruebas.GenerarReporte("precio > 2000");
+                }else if(comboBoxReporte.getSelectedItem().toString().equals("Agrupado por pais y ordenado de mayor a menor")){
+                    pruebas.GenerarReportePorOrden("precio DESC");
+                }else {
+                    JOptionPane.showMessageDialog(null, "Error al generar el reporte");
+                }
             }
         });
     }
